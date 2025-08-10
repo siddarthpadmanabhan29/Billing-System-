@@ -87,7 +87,7 @@ void Billing::addCustomer() {
 	getline(cin, c.phoneNumber);
 
 
-	string sql = "INSERT INTO Items (name, email, phone number) VALUES (?, ?, ?);";
+	string sql = "INSERT INTO Customers (name, email, phone) VALUES (?, ?, ?);";
 	sqlite3_stmt* stmt;
 	sqlite3_prepare_v2(db, sql.c_str(), -1, &stmt, nullptr);
 	sqlite3_bind_text(stmt, 1, c.name.c_str(), -1, SQLITE_TRANSIENT);
@@ -111,7 +111,7 @@ void Billing::addCreditCard() {
 	getline(cin, c.expiration);
 
 
-	string sql = "INSERT INTO Items (name, email, phone number) VALUES (?, ?, ?);";
+	string sql = "INSERT INTO CreditCards (customer_id, cardNumber, expiration) VALUES (?, ?, ?);";
 	sqlite3_stmt* stmt;
 	sqlite3_prepare_v2(db, sql.c_str(), -1, &stmt, nullptr);
 	sqlite3_bind_int(stmt, 1, customer_id);
@@ -211,5 +211,5 @@ void Billing::run() {
 
 
 
-	} while (c != 3);
+	} while (c != 5);
 }
